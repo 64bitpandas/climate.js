@@ -1,0 +1,1 @@
+'use strict';Object.defineProperty(exports,'__esModule',{value:!0});var defaultAwesomeFunction=function(a){return'I am the Default Awesome Function, fellow comrade! - '+a},awesomeFunction=function(){return'I am just an Awesome Function'};exports.default=defaultAwesomeFunction,exports.awesomeFunction=awesomeFunction;

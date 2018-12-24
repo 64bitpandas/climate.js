@@ -1,10 +1,10 @@
 {
-  "name": "npm-module-boilerplate",
+  "name": "climate.js",
   "version": "1.0.0",
-  "description": "Boilerplate for npm modules with ES6 features and syntax",
-  "main": "./lib/index.js",
+  "description": "Lightweight JavaScript package to theme your website based on the current weather",
+  "main": "./dist/index.js",
   "scripts": {
-    "clean": "rimraf lib",
+    "clean": "rimraf dist",
     "test": "npm run lint && npm run cover",
     "test:prod": "cross-env BABEL_ENV=production npm run test",
     "test:only": "mocha --require babel-core/register --require babel-polyfill --recursive",
@@ -12,7 +12,7 @@
     "test:examples": "node examples/",
     "cover": "istanbul cover _mocha -- --require babel-core/register --require babel-polyfill --recursive",
     "lint": "eslint src test",
-    "build": "cross-env BABEL_ENV=production babel src --out-dir lib",
+    "build": "cross-env BABEL_ENV=production babel src --out-dir dist",
     "prepublish": "npm run clean && npm run lint && npm run test && npm run build"
   },
   "files": [
@@ -21,21 +21,23 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/flexdinesh/npm-module-boilerplate.git"
+    "url": "git+https://github.com/dbqeo/climate.js.git"
   },
   "keywords": [
-    "boilerplate",
     "npm",
-    "module",
     "node",
-    "javascript"
+    "javascript",
+    "climate",
+    "weather",
+    "theme",
+    "climatejs"
   ],
-  "author": "Dinesh Pandiyan <flexdinesh@gmail.com>",
+  "author": "Ben Cuan <ben@bananiumlabs.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/flexdinesh/npm-module-boilerplate/issues"
+    "url": "https://github.com/dbqeo/weather.js/issues"
   },
-  "homepage": "https://github.com/flexdinesh/npm-module-boilerplate#readme",
+  "homepage": "https://github.com/dbqeo/weather.js#readme",
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-eslint": "^8.2.1",
