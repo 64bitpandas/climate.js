@@ -41,15 +41,21 @@ For a lighter version without weather effects (like snow and rain), you can alte
 
 2. Initialize the script.
 
-If `location` is set to `true`, the user will be prompted for location permissions when `initClimate()` is run.
+If `userLocation` is set to `true`, the user will be prompted for location permissions when `initClimate()` is run.
+
+If `userLocation` is set to `false`, the `location` parameter is required.
 
 ```javascript
 climate.initClimate({
     theme: 'path/to/climate.json',
-    location: false,
-    interval: 6000
+    userLocation: false,
+    location: 'San Francisco',
+    interval: 6000,
+    mode: 'weather'
 })
 ```
+
+This config will manually set the city to San Francisco, and update the color scheme every minute based on the type of weather (e.g. sunny or rainy). More configs can be found in [Options](#options).
 
 If you're too good for the default and want to make your own theme, go to [Custom Theming](#custom-theming).
 
