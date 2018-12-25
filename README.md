@@ -41,7 +41,7 @@ For a lighter version without weather effects (like snow and rain), you can alte
 
 2. Initialize the script.
 
-If `userLocation` is set to `true`, the user will be prompted for location permissions when `initClimate()` is run.
+If `userLocation` is set to `true`, the user will be prompted for location permissions when `initClimate()` is run. **Note:** Requires a web browser to access geolocation tools!
 
 If `userLocation` is set to `false`, the `location` parameter is required.
 
@@ -73,6 +73,21 @@ For graphics, here are some aliases:
 <div class="climate-trees">This is your background scenery.</div>
 <div class="climate-sky">This is the sky.</div>
 ```
+
+## Options
+
+| Option        	| Description                                                                                                                                                                                                                                                                  	| Default         	|
+|---------------	|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	|-----------------	|
+| theme         	| Path to your climate.json theme configuration. (Get the default config [here](#))                                                                                                                                                                                            	| null            	|
+| weatherAPIKey 	| API key to openweathermap. REQUIRED for use!                                                                                                                                                                                                                                 	| null            	|
+| userLocation  	| True if you wish to use the user's location; false if you want to use your own location.                                                                                                                                                                                     	| false           	|
+| location      	| Default location (name of city). Required if `userLocation` is false, but it is also highly recommended as a fallback.                                                                                                                                                       	| 'San Francisco' 	|
+| useIP         	| If true, uses ipinfo.io to get the user's location without needing to prompt for location permission. Requires API key.                                                                                                                                                      	| false           	|
+| ipAPIKEY      	| API key to ipinfo.io. Not required unless `useIP` and `userLocation` are both true.                                                                                                                                                                                          	| null            	|
+| interval      	| Interval, in milliseconds, between each weather fetch. Set to 0 to only fetch once.                                                                                                                                                                                          	| 0               	|
+| mode          	| `weather` mode changes themes based on weather (rain, snow, etc.) while `temperature` mode changes themes based on how hot it is. `all` uses both simultaneously. (Remember- you need to specify additional theme configuration if you wish to use `temperature` or `both`!) 	| 'weather'       	|
+
+## Custom Theming
 
 ## Future Features
  - Seasons

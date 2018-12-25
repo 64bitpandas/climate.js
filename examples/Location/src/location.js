@@ -6,5 +6,6 @@
 import initClimate from '../../../src/climate';
 
 initClimate({
-  userLocation: true
+  userLocation: true,
+  weatherAPIKey: 'ddebee7489203673401bc4663d43695c'
 });
