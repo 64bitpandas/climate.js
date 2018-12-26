@@ -1,5 +1,6 @@
 import { assert } from 'chai';
 import defaultAwesomeFunction, { awesomeFunction } from '../src';
+import initClimate from '../src';
 
 describe('Awesome test.', () => {
   it('should test default awesome function', () => {
@@ -12,3 +13,8 @@ describe('Awesome test.', () => {
     assert(awesomeFunction() === expectedVal, 'Named awesome :(');
   });
 });
+
+
+// describe('Climate specified location test', () => {
+//   it('should test ')
+// })
