@@ -42,3 +42,7 @@ yarn.lock
 
 others
 .DS_Store
+
+
+# Build files
+# examples/Location/location.js
