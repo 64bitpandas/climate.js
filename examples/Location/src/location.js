@@ -7,5 +7,8 @@ import initClimate from '../../../src/climate';
 
 initClimate({
   userLocation: true,
-  weatherAPIKey: 'ddebee7489203673401bc4663d43695c'
+  weatherAPIKey: 'ddebee7489203673401bc4663d43695c',
+  useIP: true,
+  ipAPIKey: '4f7dd6baa8f6db',
+  theme: '../climate.json'
 });

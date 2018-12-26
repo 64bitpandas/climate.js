@@ -19,8 +19,10 @@ exports.default = initClimate;
 function initClimate(options) {
   // attempt to get user location using ipinfo.io if specified
   if (options.userLocation) {
-    if (options.ipAPI) {
-      // TODO
+    if (options.useIP) {
+      if (!options.ipAPIKey) throw new Error('useIP is true, but no ipinfo.io API key was provided!');
+
+      getLatLong(options.ipAPIKey); //subsequently calls getWeather
     } else {
       if (navigator && navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(position => {
@@ -59,5 +61,10 @@ async function getWeather(location, apiKey, themeFile) {
 async function setTheme(themeFile, weather) {
   const theme = JSON.parse((await fetch(themeFile)));
   console.log(theme);
+}
+
+async function getLatLong(ipAPIKey) {
+  const response = await fetch(`https://ipinfo.io/json?token=${ipAPIKey}`).json();
+  console.log(response);
 }
 module.exports = exports['default'];
