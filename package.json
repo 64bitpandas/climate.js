@@ -13,7 +13,8 @@
     "cover": "istanbul cover _mocha -- --require babel-core/register --require babel-polyfill --recursive",
     "build": "mkdir -p dist && cross-env BABEL_ENV=production babel src/climate.js --out-file ./dist/climate.min.js && cross-env BABEL_ENV=development babel src/climate.js --out-file ./dist/climate.js",
     "prepublish": "npm run clean && npm run test && npm run build",
-    "example:location": "concurrently \"watchify examples/Location/src/location.js -o examples/Location/location.js\" \"live-server\""
+    "example:nature": "concurrently \"watchify examples/nature/src/nature.js -o examples/nature/nature.js\" \"live-server\"",
+    "example:location": "concurrently \"watchify examples/location/src/location.js -o examples/location/location.js\" \"live-server\""
   },
   "files": [
     "lib",

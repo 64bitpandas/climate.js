@@ -20,14 +20,16 @@ export default function initClimate(options) {
       if (!options.ipAPIKey)
         throw new Error('useIP is true, but no ipinfo.io API key was provided!');
 
-      getLatLong(options); //subsequently calls getWeather
+      setTheme(getLatLong(options), options); //subsequently calls getWeather
+      if(options.interval > 0)
+        setInterval(() => {setTheme(getLatLong(options), options)}, options.interval)
     }
     else {
       if (navigator && navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((position) => {
-          getWeather(position, options);
+          setTheme(getWeather(position, options), options);
           if (options.interval > 0)
-            setInterval(() => {getWeather(position, options), options.interval}, options.interval);
+            setInterval(() => { setTheme(getWeather(position, options), options), options.interval}, options.interval);
         });
       }
       else {
@@ -46,13 +48,14 @@ export default function initClimate(options) {
 }
 
 /**
- * Fetches weather data from openweathermap; calls setTheme() afterwards.
+ * Fetches weather data from openweathermap. Use the result to call setTheme() afterwards.
  * @param {*} location The location data to be processed.
  * Can either be a lat/long pair ({latitude: ..., longitude: ...})
  * OR a city name ('San Francisco').
  * @param {*} options Options passed through initClimate()
+ * @returns The object with weather data collected from OpenWeatherMap.
  */
-async function getWeather(location, options) {
+export async function getWeather(location, options) {
   if (!options.weatherAPIKey)
     throw new Error('You must set a valid `weatherAPIKey` in `initClimate()`!');
   let response;
@@ -64,15 +67,16 @@ async function getWeather(location, options) {
 
   const weather = (await response.json());
 
-  setTheme(weather, options);
+  return weather;
 }
 
 /**
  * Uses collected data to find and set the color of theme indicators.
+ * This is a public function in case you wish to manually configure weather patterns.
  * @param {*} weather Weather object as fetched from openweathermap
  * @param {*} options Options passed through initClimate()
  */
-async function setTheme(weather, options) {
+export async function setTheme(weather, options) {
   const theme = await (await fetch(options.theme)).json();
 
   if (!theme.use)
@@ -94,8 +98,9 @@ async function setTheme(weather, options) {
 /**
  * Gets the user's position from ipinfo, and calls getWeather() with the position.
  * @param {*} options Options passed through initClimate()
+ * @returns {*} location in openWeatherMap format (location.coords.latitude or location.coords.longitude).
  */
-async function getLatLong(options) {
+export async function getLatLong(options) {
   const response = await (await fetch(`https://ipinfo.io/json?token=${options.ipAPIKey}`)).json();
   const loc = ('' + response.loc).split(',');
   const location = {
@@ -105,7 +110,23 @@ async function getLatLong(options) {
     }
   }
 
-  getWeather(location, options);
+  return location;
+}
+
+
+/**
+ * Convert from Kelvin to either Celsius or Fahrenheit, as specified.
+ * @param {string} resultUnit What unit to convert to ('celsius' or 'fahrenheit')
+ * @param {number} input Input Kelvin value.
+ * @returns {number} The converted value.
+ */
+export function convertFromKelvin(resultUnit, input) {
+  if(resultUnit.toLowerCase() === 'celsius')
+    return input - 273.15;
+  else if (resultUnit.toLowerCase() === 'fahrenheit')
+    return (input - 273.15) * 9/5 + 32;
+  else
+    throw new Error('resultUnit must be celsius or fahrenheit!');
 }
 
 /**

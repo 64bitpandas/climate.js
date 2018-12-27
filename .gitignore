@@ -45,4 +45,5 @@ others
 
 
 # Build files
-examples/Location/location.js
+examples/location/location.js
+examples/nature/nature.js

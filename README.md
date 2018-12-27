@@ -91,6 +91,10 @@ will use the `climate-primary` class. You may add as many indicators as you wish
 
 4. Create `climate.json`. A default config is provided [here](https://github.com/dbqeo/climate.js/blob/master/examples/climate.json) if you want to get up and running ASAP. If you're too good for the default and want to make your own theme, go to [Custom Theming](#custom-theming).
 
+## Run Example Code
+
+Examples are provided in the `examples` folder. In order to run them, clone this repository, `npm install`, then `npm run example:<exampleName>` where <exampleName> is replaced by the name of the example (e.g. `nature`).
+
 ## Options
 
 | Option        	| Description                                                                                                                                                                                                                                                                  	| Default         	|
