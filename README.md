@@ -9,6 +9,21 @@ Insert screenshot here
 
 Climate.js takes raw weather data and offers a variety of customizable color schemes and visualizers to reflect the current weather. Add extra flair to location-based webapps, or perhaps give a homey feel with weather from your hometown- anything to help make your site more responsive :)
 
+
+## Features in 1.0.0
+ - Weather data collection (local or manual) from OpenWeatherMap
+ - Get rough user location without prompt using ipinfo
+ - Set custom configurations for class names, colors, and weather sets
+ - Run once or at a specified interval
+ - No dependencies!
+
+## Coming Soon
+ - Seasons
+ - Sunset/sunrise gradient skies
+ - Wind/rain/snow effects
+ - MOAR CUSTOMIZATION
+ - Want something else? [Create an issue](https://github.com/dbqeo/climate.js/issues/new)!
+
 ## Install
 
 **NPM**: https://npm.js/package/climate.js (COMING SOON!) `npm install --save climate.js`
@@ -35,8 +50,6 @@ const climate = require('climate.min.js');
 ```javascript
 import * as climate from 'climate.min.js';
 ```
-
-For a lighter version without weather effects (like snow and rain), you can alternatively use `climate-noeffects.min.js`.
 
 2. Initialize the script.
 
@@ -107,10 +120,4 @@ A default config for reference is provided [here](https://github.com/dbqeo/clima
 | use         	| Specifies what OpenWeatherMap parameter to use for differentiating weather patterns. Valid inputs are `id`, `main`, and `description` for weather; `temp`, `pressure`, `humidity`, `temp_min`, or `temp_max` for temperature. See the [OpenWeatherMap API list](https://openweathermap.org/weather-conditions) for more info.                           	|
 | weather     	| Specifies color themes for weather patterns, using the specified parameter from `use.weather`. See the [OpenWeatherMap API list](https://openweathermap.org/weather-conditions) for valid parameters.                                                                                                                                               	|
 | temperature 	| Specifies color themes for temperature ranges, using the specified parameter from `use.weather`. See the [OpenWeatherMap API list](https://openweathermap.org/weather-conditions) for valid parameters. Specify `min` and `max` temperature values inside each self-labeled temperature range. Also specify `units` (either `Fahrenheit` or `Celsius`). 	|
-| sun         	| Two parameters: `rise` and `set`, corresponding to sunrise and sunset colors. Specify `timeRange` which is the time, in minutes, before and after sunset/rise time to display sunset colors.                                                                                                                                                            	|                                         
-
-## Future Features
- - Seasons
- - Sunset/sunrise gradient skies
- - MOAR CUSTOMIZATION
- - Want something else? [Create an issue](https://github.com/dbqeo/climate.js/issues/new)!
+| sun         	| Two parameters: `rise` and `set`, corresponding to sunrise and sunset colors. Specify `timeRange` which is the time, in minutes, before and after sunset/rise time to display sunset colors.                                                                                                                                                            	|                            
