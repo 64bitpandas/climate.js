@@ -18,12 +18,12 @@ export default function initClimate(options) {
       if(!options.ipAPIKey)
         throw new Error('useIP is true, but no ipinfo.io API key was provided!');
 
-      getLatLong(options.weatherAPIKey, options.theme, options.ipAPIKey); //subsequently calls getWeather
+      getLatLong(options); //subsequently calls getWeather
     }
     else {
       if(navigator && navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((position) => {
-          getWeather(position, options.weatherAPIKey, options.theme);
+          getWeather(position, options);
         });
       }
       else {
@@ -34,8 +34,8 @@ export default function initClimate(options) {
   }
   // Required if not else - userLocation changes after the initial if is run
   if(!options.userLocation) {
-    if(!options.location) options.location = 'San Francisco'; // TODO move to globals
-    getWeather(options.location, options.weatherAPIKey, options.theme);
+    if(!options.location) options.location = DEFAULTS.location;
+    getWeather(options.location, options);
   }
 }
 
@@ -45,28 +45,42 @@ export default function initClimate(options) {
  * Can either be a lat/long pair ({latitude: ..., longitude: ...})
  * OR a city name ('San Francisco').
  */
-async function getWeather(location, apiKey, themeFile) {
-  if(!apiKey)
+async function getWeather(location, options) {
+  if(!options.weatherAPIKey)
     throw new Error('You must set a valid `weatherAPIKey` in `initClimate()`!');
   let response;
   if(location.coords.latitude) // Use lat/long
-    response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${location.coords.latitude}&lon=${location.coords.longitude}&appid=${apiKey}`);
+    response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${location.coords.latitude}&lon=${location.coords.longitude}&appid=${options.weatherAPIKey}`);
   else
-    response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(location)}&appid=${apiKey}`);
+    response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(location)}&appid=${options.weatherAPIKey}`);
 
   const weather = (await response.json());
 
-  setTheme(themeFile, weather)
+  setTheme(weather, options)
 }
 
 
-async function setTheme(themeFile, weather) {
- const theme = await (await fetch(themeFile)).json();
+async function setTheme(weather, options) {
+ const theme = await (await fetch(options.theme)).json();
  console.log(weather);
+
+ if(!theme.use)
+  throw new Error('`use` must be defined in climate.json!');
+
+ let currTheme = (options.mode === 'temperature')
+  ? theme.temperature[weather.main[theme.use.temperature]]
+  : theme.weather[weather.weather[0][theme.use.weather]];
+
+  console.log(weather.weather);
+ for(let indicator in currTheme) {
+   const elements = document.getElementsByClassName('climate-' + indicator);
+   console.log(elements);
+ }
+
 }
 
-async function getLatLong(apiKey, themeFile, ipAPIKey) {
-  const response = await (await fetch(`https://ipinfo.io/json?token=${ipAPIKey}`)).json();
+async function getLatLong(options) {
+  const response = await (await fetch(`https://ipinfo.io/json?token=${options.ipAPIKey}`)).json();
   const loc = ('' + response.loc).split(',');
   const location = {
     coords: {
@@ -75,5 +89,11 @@ async function getLatLong(apiKey, themeFile, ipAPIKey) {
     }
   }
 
-  getWeather(location, apiKey, themeFile);
+  getWeather(location, options);
+}
+
+
+const DEFAULTS = {
+  location: 'San Francisco',
+  mode: 'weather'
 }

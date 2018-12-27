@@ -8,12 +8,12 @@
     "temperature": "temp"
   },
   "weather": {
-    "clear sky": {
+    "Clear": {
       "primary": "#AAAAAA",
       "secondary": "#BBBBBB",
       "sky": "#CCCCCC"
     },
-    "scattered clouds": {
+    "Clouds": {
       "primary": "#AAAAAA",
       "secondary": "#BBBBBB",
       "sky": "#CCCCCC"
