@@ -63,7 +63,7 @@ export async function getWeather(location, options) {
   if (location.coords.latitude) // Use lat/long
     response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${location.coords.latitude}&lon=${location.coords.longitude}&appid=${options.weatherAPIKey}`);
   else
-    response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(location)}&appid=${options.weatherAPIKey}`);
+    response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(options.location)}&appid=${options.weatherAPIKey}`);
 
   const weather = (await response.json());
 
@@ -77,7 +77,12 @@ export async function getWeather(location, options) {
  * @param {*} options Options passed through initClimate()
  */
 export async function setTheme(weather, options) {
-  const theme = await (await fetch(options.theme)).json();
+
+  try {
+    const theme = await (await fetch(options.theme)).json();
+  } catch(error) {
+    console.error('climate.json is missing or at the wrong location!');
+  }
 
   if (!theme.use)
     throw new Error('`use` must be defined in climate.json!');
@@ -127,6 +132,34 @@ export function convertFromKelvin(resultUnit, input) {
     return (input - 273.15) * 9/5 + 32;
   else
     throw new Error('resultUnit must be celsius or fahrenheit!');
+}
+
+
+/**
+ * Returns coordinates regardless of the type of location detection (ip, geolocation, or none).
+ * @param {*} options Options passed through initClimate()
+ */
+export async function getCurrentLocation(options) {
+  if(options.userLocation) {
+    // From ipinfo
+    if(options.useIP) {
+      return await getLatLong(options);
+    }
+    // From geolocation
+    return await new Promise((resolve) => {
+      navigator.geolocation.getCurrentPosition(resolve);
+    });
+  } else {
+    // Use openweathermap to get the coordinates from query
+    let response = await (await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(options.location)}&appid=${options.weatherAPIKey}`)).json();
+    console.log(response);
+    return {
+      coords: {
+        latitude: response.coord.lat,
+        longitude: response.coord.lon
+      }
+    };
+  }
 }
 
 /**

@@ -1,5 +1,5 @@
 import { assert } from 'chai';
-import initClimate, { getWeather, getLatLong, convertFromKelvin } from '../src/climate';
+import * as climate from '../dist/climate';
 
 // describe('Awesome test.', () => {
 //   it('should test default awesome function', () => {
@@ -15,7 +15,8 @@ import initClimate, { getWeather, getLatLong, convertFromKelvin } from '../src/c
 
 
 const options = {
-  userLocation: true,
+  userLocation: false,
+  location: 'San Jose',
   weatherAPIKey: 'ddebee7489203673401bc4663d43695c',
   useIP: true,
   ipAPIKey: '4f7dd6baa8f6db',
@@ -29,17 +30,17 @@ describe('Climate.js test', () => {
 
   // it('should test getLatLong', () => {
   //   assert(
-  //     !isNaN(getLatLong(options).coords.latitude) &&
-  //     !isNaN(getLatLong(options).coords.longitude));
+  //     !isNaN(climate.getLatLong(options).coords.latitude) &&
+  //     !isNaN(climate.getLatLong(options).coords.longitude));
   // })
 
   it('should test kelvin to celsius', () => {
     const expected = 100;
-    assert(convertFromKelvin('celsius', 373.15));
+    assert(climate.convertFromKelvin('celsius', 373.15) === expected);
   })
 
   it('should test kelvin to fahrenheit', () => {
     const expected = 80.6;
-    assert(convertFromKelvin('fahrenheit', 300.15));
+    assert(climate.convertFromKelvin('fahrenheit', 300.15) === expected);
   })
 })
