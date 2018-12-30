@@ -1,6 +1,6 @@
 {
   "name": "climate.js",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Lightweight JavaScript package to theme your website based on the current weather",
   "main": "./dist/index.js",
   "scripts": {
@@ -12,7 +12,7 @@
     "test:examples": "node examples/",
     "cover": "istanbul cover _mocha -- --require babel-core/register --require babel-polyfill --recursive",
     "build": "mkdir -p dist && cross-env BABEL_ENV=production babel src/climate.js --out-file ./dist/climate.min.js && cross-env BABEL_ENV=development babel src/climate.js --out-file ./dist/climate.js",
-    "prepublish": "npm run clean && npm run test && npm run build",
+    "prepublish": "npm run clean && npm run build && npm run test",
     "example:nature": "concurrently \"watchify examples/nature/src/nature.js -o examples/nature/nature.js\" \"live-server\"",
     "example:location": "concurrently \"watchify examples/location/src/location.js -o examples/location/location.js\" \"live-server\""
   },
@@ -76,8 +76,5 @@
     "watchify": "^3.11.0",
     "acorn": "^6.0.4",
     "live-server": "^1.2.1"
-  },
-  "dependencies": {
-
   }
 }

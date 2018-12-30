@@ -4,13 +4,10 @@
 [![](https://img.shields.io/badge/license-MIT-red.svg)](https://github.com/dbqeo/climate.js)
 
 
-Insert screenshot here
-
-
 Climate.js takes raw weather data and offers a variety of customizable color schemes and visualizers to reflect the current weather. Add extra flair to location-based webapps, or perhaps give a homey feel with weather from your hometown- anything to help make your site more responsive :)
 
 
-## Features in 1.0.0
+## Features in 1.0
  - Weather data collection (local or manual) from OpenWeatherMap
  - Get rough user location without prompt using ipinfo
  - Set custom configurations for class names, colors, and weather sets
@@ -26,7 +23,7 @@ Climate.js takes raw weather data and offers a variety of customizable color sch
 
 ## Install
 
-**NPM**: https://npm.js/package/climate.js (COMING SOON!) `npm install --save climate.js`
+**NPM**: https://npm.js/package/climate.js `npm install --save climate.js`
 
 **Download**: [Get the latest version here!](https://github.com/dbqeo/climate.js/releases/latest)
 
