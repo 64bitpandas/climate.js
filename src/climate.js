@@ -13,7 +13,7 @@
  * @param {*} options The option parameters used for this configuration.
  * See the readme (https://github.com/dbqeo/climate.js#readme) for more details.
  */
-export default function initClimate(options) {
+export function initClimate(options) {
   // attempt to get user location using ipinfo.io if specified
   if (options.userLocation) {
     if (options.useIP) {

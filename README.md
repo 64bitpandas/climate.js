@@ -31,6 +31,8 @@ Climate.js takes raw weather data and offers a variety of customizable color sch
 
 ## Usage
 
+**IMPORTANT NOTE**: `climate.min.js` is a *standalone* module for use in default environments. If you're using babel/browserify/webpack, import from `climate.js` instead.
+
 1. Include the script using your preferred method:
 
 **Script Tag**
@@ -40,12 +42,12 @@ Climate.js takes raw weather data and offers a variety of customizable color sch
 
 **Require**
 ```javascript
-const climate = require('climate.min.js');
+const climate = require('climate.js');
 ```
 
 **es6**
 ```javascript
-import * as climate from 'climate.min.js';
+import * as climate from 'climate.js';
 ```
 
 2. Initialize the script.
