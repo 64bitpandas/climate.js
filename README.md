@@ -6,8 +6,11 @@
 
 Climate.js takes raw weather data and offers a variety of customizable color schemes and visualizers to reflect the current weather. Add extra flair to location-based webapps, or perhaps give a homey feel with weather from your hometown- anything to help make your site more responsive :)
 
+## What's new in 1.1
 
-## Features in 1.0
+Climate.js is now built for standalone use! The usage of `<script>` tags has changed to match the module usage (e.g. `climate.initClimate()` instead of `initClimate()`). See [Usage](#usage) for more information.
+
+## Features
  - Weather data collection (local or manual) from OpenWeatherMap
  - Get rough user location without prompt using ipinfo
  - Set custom configurations for class names, colors, and weather sets
