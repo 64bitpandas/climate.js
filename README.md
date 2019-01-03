@@ -126,7 +126,7 @@ Examples are provided in the `examples` folder. In order to run them, clone this
 | useIP         	| If true, uses ipinfo.io to get the user's location without needing to prompt for location permission. Requires API key.                                                                                                                                                      	| false           	|
 | ipAPIKey      	| API key to ipinfo.io. Not required unless `useIP` and `userLocation` are both true.                                                                                                                                                                                          	| null            	|
 | interval      	| Interval, in milliseconds, between each weather fetch. Set to 0 to only fetch once.                                                                                                                                                                                          	| 0               	|
-| mode          	| `color` mode changes the color of the elements, while `toggle` mode will show an element only if the weather pattern matches. | 'color'       	|
+| mode          	| `color` mode changes the color of the elements, while `toggle` mode will show an element only if the weather pattern matches. `all` will use both. | 'all'       	|
 
 ## Custom Theming
 

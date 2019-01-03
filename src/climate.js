@@ -20,16 +20,30 @@ export function initClimate(options) {
       if (!options.ipAPIKey)
         throw new Error('useIP is true, but no ipinfo.io API key was provided!');
 
-      setTheme(getLatLong(options), options); //subsequently calls getWeather
+      getLatLong(options).then((data) => {
+        getWeather(data, options).then((weatherData) => {
+          setTheme(weatherData, options);
+        });
+      }); //subsequently calls getWeather
       if(options.interval > 0)
-        setInterval(() => {setTheme(getLatLong(options), options)}, options.interval)
+        setInterval(() => {getLatLong(options).then((data) => {
+          getWeather(data, options).then((weatherData) => {
+            setTheme(weatherData, options);
+          });
+        })}, options.interval)
     }
     else {
       if (navigator && navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((position) => {
-          setTheme(getWeather(position, options), options);
+          getWeather(position, options).then((weatherData) => {
+            setTheme(weatherData, options);
+          });
           if (options.interval > 0)
-            setInterval(() => { setTheme(getWeather(position, options), options), options.interval}, options.interval);
+            setInterval(() => {
+              getWeather(position, options).then((weatherData) => {
+                setTheme(weatherData, options);
+              });
+            }, options.interval);
         });
       }
       else {
@@ -41,9 +55,15 @@ export function initClimate(options) {
   // Required if not else - userLocation changes after the initial if is run
   if (!options.userLocation) {
     if (!options.location) options.location = DEFAULTS.location;
-    getWeather(options.location, options);
+    getWeather(options.location, options).then((weatherData) => {
+      setTheme(weatherData, options);
+    });
     if (options.interval > 0)
-      setInterval(() => { getWeather(options.location, options), options.interval }, options.interval);
+      setInterval(() => {
+        getWeather(position, options).then((weatherData) => {
+          setTheme(weatherData, options);
+        });
+      }, options.interval);
   }
 }
 
@@ -60,7 +80,7 @@ export async function getWeather(location, options) {
     throw new Error('You must set a valid `weatherAPIKey` in `initClimate()`!');
   let response;
 
-  if (location.coords.latitude) // Use lat/long
+  if (location.coords) // Use lat/long
     response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${location.coords.latitude}&lon=${location.coords.longitude}&appid=${options.weatherAPIKey}`);
   else
     response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(options.location)}&appid=${options.weatherAPIKey}`);
@@ -77,9 +97,9 @@ export async function getWeather(location, options) {
  * @param {*} options Options passed through initClimate()
  */
 export async function setTheme(weather, options) {
-
+  let theme;
   try {
-    const theme = await (await fetch(options.theme)).json();
+    theme = await (await fetch(options.theme)).json();
   } catch(error) {
     console.error('climate.json is missing or at the wrong location!');
   }
@@ -91,18 +111,18 @@ export async function setTheme(weather, options) {
   if(!mode)
     mode = DEFAULTS.mode;
 
-  let currTheme = (theme.temperature[weather.main[theme.use.temperature]])
+  let currTheme = (theme.temperature.enabled)
     ? theme.temperature[weather.main[theme.use.temperature]]
     : theme.weather[weather.weather[0][theme.use.weather]];
 
-  if(mode === 'color') {
+  if(mode === 'color' || mode === 'all') {
     for (let indicator in currTheme) {
       const elements = document.getElementsByClassName('climate-' + indicator);
       for (let element of elements) {
         element.style.color = currTheme[indicator];
       }
     }
-  } else if(mode === 'toggle') {
+  } else if(mode === 'toggle' || mode === 'all') {
     const elements = document.getElementsByClassName('climate-toggle');
     for(let element of elements) {
       if(element.classList.contains('climate-' + currTheme))
@@ -165,7 +185,6 @@ export async function getCurrentLocation(options) {
   } else {
     // Use openweathermap to get the coordinates from query
     let response = await (await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(options.location)}&appid=${options.weatherAPIKey}`)).json();
-    console.log(response);
     return {
       coords: {
         latitude: response.coord.lat,
@@ -180,5 +199,5 @@ export async function getCurrentLocation(options) {
  */
 const DEFAULTS = {
   location: 'San Francisco',
-  mode: 'color'
+  mode: 'all'
 }

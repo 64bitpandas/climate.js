@@ -29,6 +29,7 @@
     }
   },
   "temperature": {
+    "enabled": false,
     "units": "celsius",
     "freezing": {
       "max": 10,

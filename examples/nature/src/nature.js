@@ -4,24 +4,22 @@
  * results on a minimalistic nature scene.
  */
 
- import initClimate from '../../../src/climate';
+import * as climate from '../../../src/climate';
 
- /**
-  * Map this function to the weather switcher buttons.
-  * Calls setTheme() with custom weather options.
-  * @param {string} pattern Name of weather pattern (e.g. 'Clear').
-  * 'detect' is used to signify that the user's location will be used.
-  */
- function switchTo(pattern) {
+let options = {
+  userLocation: true,
+  weatherAPIKey: 'ddebee7489203673401bc4663d43695c',
+  useIP: true,
+  ipAPIKey: '4f7dd6baa8f6db',
+  theme: '../climate.json',
+};
 
-  let defaultOptions = {
-    userLocation: false,
-    weatherAPIKey: 'ddebee7489203673401bc4663d43695c',
-    useIP: true,
-    ipAPIKey: '4f7dd6baa8f6db',
-    theme: '../climate.json',
-  }
+climate.initClimate(options);
 
-  if(pattern === 'detect')
-    defaultOptions;
- }
+climate.getCurrentLocation(options).then((data) => {
+  console.log(data);
+  climate.getWeather(data, options).then((weatherData) => {
+    console.log(weatherData);
+    document.getElementById('title').innerHTML = "<b>Weather Data:</b> <br>" + JSON.stringify(weatherData);
+  });
+});
