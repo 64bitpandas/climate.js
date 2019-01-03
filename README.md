@@ -65,7 +65,8 @@ climate.initClimate({
     userLocation: false,
     location: 'San Francisco',
     interval: 6000,
-    mode: 'weather'
+    mode: 'weather',
+    weatherAPIKey: 'insertyourkeyherefromopenweatherapi'
 })
 ```
 

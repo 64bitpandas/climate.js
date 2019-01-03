@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
  - `climate.min.js` built for standalone cases rather than webpack-only
  - minor additions to changelog
+ - Change colors in sample climate.json config
 
 ### Added
  - Nature example
