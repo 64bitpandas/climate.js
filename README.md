@@ -4,6 +4,8 @@
 [![](https://img.shields.io/badge/license-MIT-red.svg)](https://github.com/dbqeo/climate.js)
 
 
+![Climate Banner](climate-banner.png)
+
 Climate.js takes raw weather data and offers a variety of customizable color schemes and visualizers to reflect the current weather. Add extra flair to location-based webapps, or perhaps give a homey feel with weather from your hometown- anything to help make your site more responsive :)
 
 ## What's new in 1.1
