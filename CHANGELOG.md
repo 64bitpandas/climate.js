@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
  - Nature example
  - Toggle mode: ability to show and hide elements based on the weather
+ - Option to change background color instead of foreground color
 
 ## [1.0.1] - 2018-12-30
 

@@ -1,6 +1,17 @@
 #background {
-  z-index: 999;
   min-height: 100vh;
   min-width: 100vw;
   position: fixed;
+}
+
+#footer-background {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: transparent;
+}
+
+.row img {
+  max-height: 256px;
+  max-width: 256px;
 }

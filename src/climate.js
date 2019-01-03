@@ -111,26 +111,36 @@ export async function setTheme(weather, options) {
   if(!mode)
     mode = DEFAULTS.mode;
 
+  let currWeather = (theme.temperature.enabled)
+    ? weather.main[theme.use.temperature]
+    : weather.weather[0][theme.use.weather];
   let currTheme = (theme.temperature.enabled)
-    ? theme.temperature[weather.main[theme.use.temperature]]
-    : theme.weather[weather.weather[0][theme.use.weather]];
+    ? theme.temperature[currWeather]
+    : theme.weather[currWeather];
 
   if(mode === 'color' || mode === 'all') {
     for (let indicator in currTheme) {
       const elements = document.getElementsByClassName('climate-' + indicator);
+      const backgroundElements = document.getElementsByClassName('climate-' + indicator + '-background');
       for (let element of elements) {
         element.style.color = currTheme[indicator];
       }
+      for (let element of backgroundElements) {
+        element.style['background-color'] = currTheme[indicator];
+      }
     }
-  } else if(mode === 'toggle' || mode === 'all') {
+  }
+
+  if(mode === 'toggle' || mode === 'all') {
     const elements = document.getElementsByClassName('climate-toggle');
     for(let element of elements) {
-      if(element.classList.contains('climate-' + currTheme))
+
+      if(element.classList.contains(('climate-' + currWeather).toLowerCase()))
         element.style.display = 'inherit';
       else
         element.style.display = 'none';
     }
-  } else throw new Error('mode not recognized! Valid modes: color, toggle');
+  }
 }
 
 /**

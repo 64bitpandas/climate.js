@@ -6,18 +6,49 @@ Demonstration of climate.js through a nature scene. -->
   <title>Nature Example - Climate.js</title>
 </head>
 
-<div id="background" class="climate-sky"></div>
+<body class="climate-sky-background">
 
-<div class="container">
-
-  <div class="row col-sm d-flex justify-content-center">
-    <h1>Nature Example - Climate.js</h1>
+  <!-- Icon differs based on weather -->
+  <div class="row col-sm d-flex">
+    <img class="climate-toggle climate-clear" src="img/sun.png">
+    <img class="climate-toggle climate-clouds" src="img/cloud.png">
+    <img class="climate-toggle climate-snow" src="img/snow.png">
   </div>
 
-</div>
+  <div class="container">
 
-<footer>
-  <script src="nature.js"></script>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
-    crossorigin="anonymous">
-</footer>
+    <div class="row col-sm d-flex justify-content-center">
+      <h1>Nature Example - Climate.js</h1>
+    </div>
+    <br>
+
+    <!-- Text differs based on weather -->
+    <div class="row col-sm d-flex justify-content-center">
+      <h3 class="climate-toggle climate-clear">It's clear out. Enjoy the sun :D</h3>
+      <h3 class="climate-toggle climate-clouds">It's cloudy. Could be worse.</h3>
+      <h3 class="climate-toggle climate-snow">It's snowing! LET IT SNOW~ </h3>
+      <h3 class="climate-toggle climate-cloudy climate-drizzle">It's drizzling right now. You might want to bring an
+        umbrella.</h3>
+      <h3 class="climate-toggle climate-cloudy climate-rain">It's raining. Bring your umbrella!</h3>
+    </div>
+
+    <br>
+
+    <div class="row col-sm d-flex justify-content-center">
+      <h5 id="location">To be filled by location data</h5>
+    </div>
+
+
+  </div>
+  <div id="footer-background">
+    <img src="img/footer.svg">
+  </div>
+</section>
+
+  <footer>
+    <script src="nature.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+      crossorigin="anonymous">
+  </footer>
+
+

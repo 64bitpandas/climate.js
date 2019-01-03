@@ -17,9 +17,7 @@ let options = {
 climate.initClimate(options);
 
 climate.getCurrentLocation(options).then((data) => {
-  console.log(data);
   climate.getWeather(data, options).then((weatherData) => {
-    console.log(weatherData);
-    document.getElementById('title').innerHTML = "<b>Weather Data:</b> <br>" + JSON.stringify(weatherData);
+    document.getElementById('location').innerHTML = "<b>You are currently in:</b> " + weatherData.name;
   });
 });

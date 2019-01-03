@@ -11,12 +11,22 @@
     "Clear": {
       "primary": "#AAAAAA",
       "secondary": "#BBBBBB",
-      "sky": "#CCCCCC"
+      "sky": "#b3e5fc"
     },
     "Clouds": {
       "primary": "#AAAAAA",
       "secondary": "#BBBBBB",
-      "sky": "#CCCCCC"
+      "sky": "#b0bec5"
+    },
+    "Rain": {
+      "primary": "#AAAAAA",
+      "secondary": "#BBBBBB",
+      "sky": "#78909c"
+    },
+    "Drizzle": {
+      "primary": "#AAAAAA",
+      "secondary": "#BBBBBB",
+      "sky": "#b0bec5"
     }
   },
   "sun": {

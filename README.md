@@ -12,6 +12,8 @@ Climate.js takes raw weather data and offers a variety of customizable color sch
 
  - Climate.js is now built for standalone use! The usage of `<script>` tags has changed to match the module usage (e.g. `climate.initClimate()` instead of `initClimate()`). See [Usage](#usage) for more information.
  - Toggle Mode: Instead of the usual 'color' mode, you can opt to show/hide elements based on the current weather.
+ - Option to change background color instead of foreground color
+ - Lots of bug fixes!
 
 ## Features
  - Weather data collection (local or manual) from OpenWeatherMap
@@ -22,6 +24,7 @@ Climate.js takes raw weather data and offers a variety of customizable color sch
 
 ## Coming Soon
  - Seasons
+ - Time (night vs. day)
  - Sunset/sunrise gradient skies
  - Wind/rain/snow effects
  - MOAR CUSTOMIZATION
@@ -81,6 +84,11 @@ This config will manually set the city to San Francisco, and update the color sc
 
 ```html
 <div class="climate-[indicator]">Content</div>
+```
+
+You can also opt to change the `background-color` instead:
+```html
+<div class="climate-[indicator]-background">Background</div>
 ```
 
 Replace `[indicator]` with your custom indicator as specified in `climate.json`. For example:
