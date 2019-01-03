@@ -10,9 +10,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
  - `climate.min.js` built for standalone cases rather than webpack-only
  - minor additions to changelog
  - Change colors in sample climate.json config
+ - 'mode' option now specifies color vs. toggle
 
 ### Added
  - Nature example
+ - Toggle mode: ability to show and hide elements based on the weather
 
 ## [1.0.1] - 2018-12-30
 

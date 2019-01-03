@@ -10,7 +10,8 @@ Climate.js takes raw weather data and offers a variety of customizable color sch
 
 ## What's new in 1.1
 
-Climate.js is now built for standalone use! The usage of `<script>` tags has changed to match the module usage (e.g. `climate.initClimate()` instead of `initClimate()`). See [Usage](#usage) for more information.
+ - Climate.js is now built for standalone use! The usage of `<script>` tags has changed to match the module usage (e.g. `climate.initClimate()` instead of `initClimate()`). See [Usage](#usage) for more information.
+ - Toggle Mode: Instead of the usual 'color' mode, you can opt to show/hide elements based on the current weather.
 
 ## Features
  - Weather data collection (local or manual) from OpenWeatherMap
@@ -76,6 +77,8 @@ This config will manually set the city to San Francisco, and update the color sc
 
 3. Create your divs.
 
+**Color Mode:** Changes div colors based on weather.
+
 ```html
 <div class="climate-[indicator]">Content</div>
 ```
@@ -85,7 +88,7 @@ Replace `[indicator]` with your custom indicator as specified in `climate.json`.
 ```json
 {
   "weather": {
-    "sunny": {
+    "clear": {
       "primary": "#FFFFFF"
     }
     ...
@@ -93,6 +96,18 @@ Replace `[indicator]` with your custom indicator as specified in `climate.json`.
 }
 ```
 will use the `climate-primary` class. You may add as many indicators as you wish, as long as all of your weather patterns have the same indicators.
+
+**Toggle Mode:** Will show or hide divs based on the weather.
+
+```html
+<div class="climate-toggle climate-clear">Content</div>
+<div class="climate-toggle climate-clouds">More Content</div>
+```
+
+In the above example, if the weather is currently clear, only the top div will be visible.
+
+Toggle mode can also be used for temperatures, if specified (e.g. `climate-cold`).
+
 
 4. Create `climate.json`. A default config is provided [here](https://github.com/dbqeo/climate.js/blob/master/examples/climate.json) if you want to get up and running ASAP. If you're too good for the default and want to make your own theme, go to [Custom Theming](#custom-theming).
 
@@ -111,7 +126,7 @@ Examples are provided in the `examples` folder. In order to run them, clone this
 | useIP         	| If true, uses ipinfo.io to get the user's location without needing to prompt for location permission. Requires API key.                                                                                                                                                      	| false           	|
 | ipAPIKey      	| API key to ipinfo.io. Not required unless `useIP` and `userLocation` are both true.                                                                                                                                                                                          	| null            	|
 | interval      	| Interval, in milliseconds, between each weather fetch. Set to 0 to only fetch once.                                                                                                                                                                                          	| 0               	|
-| mode          	| `weather` mode changes themes based on weather (rain, snow, etc.) while `temperature` mode changes themes based on how hot it is. If both configs are provided, weather will take precedence. (Remember- you need to specify additional theme configuration if you wish to use `temperature`!) 	| 'weather'       	|
+| mode          	| `color` mode changes the color of the elements, while `toggle` mode will show an element only if the weather pattern matches. | 'color'       	|
 
 ## Custom Theming
 
@@ -126,7 +141,7 @@ A default config for reference is provided [here](https://github.com/dbqeo/clima
 | Field       	| Description                                                                                                                                                                                                                                                                                                                                             	|
 |-------------	|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	|
 | defaults    	| Specifies the default weather/temperature if an unconfigured weather pattern appears.                                                                                                                                                                                                                                                                   	|
-| use         	| Specifies what OpenWeatherMap parameter to use for differentiating weather patterns. Valid inputs are `id`, `main`, and `description` for weather; `temp`, `pressure`, `humidity`, `temp_min`, or `temp_max` for temperature. See the [OpenWeatherMap API list](https://openweathermap.org/weather-conditions) for more info.                           	|
+| use         	| Specifies what OpenWeatherMap parameter to use for differentiating weather patterns. Valid inputs are `id`, `main`, and `description` for weather; `temp`, `pressure`, `humidity`, `temp_min`, or `temp_max` for temperature. See the [OpenWeatherMap API list](https://openweathermap.org/weather-conditions) for more info.                            	|
 | weather     	| Specifies color themes for weather patterns, using the specified parameter from `use.weather`. See the [OpenWeatherMap API list](https://openweathermap.org/weather-conditions) for valid parameters.                                                                                                                                               	|
-| temperature 	| Specifies color themes for temperature ranges, using the specified parameter from `use.weather`. See the [OpenWeatherMap API list](https://openweathermap.org/weather-conditions) for valid parameters. Specify `min` and `max` temperature values inside each self-labeled temperature range. Also specify `units` (either `Fahrenheit` or `Celsius`). 	|
+| temperature 	| Specifies color themes for temperature ranges, using the specified parameter from `use.weather`. See the [OpenWeatherMap API list](https://openweathermap.org/weather-conditions) for valid parameters. Specify `min` and `max` temperature values inside each self-labeled temperature range. Also specify `units` (either `Fahrenheit` or `Celsius`). If temperature styles are given, they will be used over weather pattern styles.	|
 | sun         	| Two parameters: `rise` and `set`, corresponding to sunrise and sunset colors. Specify `timeRange` which is the time, in minutes, before and after sunset/rise time to display sunset colors.                                                                                                                                                            	|                            

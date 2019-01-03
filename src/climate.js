@@ -4,7 +4,7 @@
  * Created by Ben Cuan <ben@bananiumlabs.com>
  * https://github.com/dbqeo/climate.js
  *
- * Version 1.0.0 - December 27, 2018
+ * Version 1.1.0 - January 3, 2019
  */
 'use strict';
 
@@ -87,17 +87,30 @@ export async function setTheme(weather, options) {
   if (!theme.use)
     throw new Error('`use` must be defined in climate.json!');
 
-  let currTheme = (options.mode === 'temperature')
+  let mode = options.mode;
+  if(!mode)
+    mode = DEFAULTS.mode;
+
+  let currTheme = (theme.temperature[weather.main[theme.use.temperature]])
     ? theme.temperature[weather.main[theme.use.temperature]]
     : theme.weather[weather.weather[0][theme.use.weather]];
 
-  for (let indicator in currTheme) {
-    const elements = document.getElementsByClassName('climate-' + indicator);
-    for (let element of elements) {
-      element.style.color = currTheme[indicator];
+  if(mode === 'color') {
+    for (let indicator in currTheme) {
+      const elements = document.getElementsByClassName('climate-' + indicator);
+      for (let element of elements) {
+        element.style.color = currTheme[indicator];
+      }
     }
-  }
-
+  } else if(mode === 'toggle') {
+    const elements = document.getElementsByClassName('climate-toggle');
+    for(let element of elements) {
+      if(element.classList.contains('climate-' + currTheme))
+        element.style.display = 'inherit';
+      else
+        element.style.display = 'none';
+    }
+  } else throw new Error('mode not recognized! Valid modes: color, toggle');
 }
 
 /**
@@ -167,5 +180,5 @@ export async function getCurrentLocation(options) {
  */
 const DEFAULTS = {
   location: 'San Francisco',
-  mode: 'weather'
+  mode: 'color'
 }

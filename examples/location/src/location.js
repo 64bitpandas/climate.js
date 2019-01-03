@@ -13,8 +13,6 @@ let options = {
   location: 'San Francisco'
 };
 
-let weatherData;
-
 function refresh() {
   getCurrentLocation(options).then((data) => {
     getWeather(data, options).then((weatherData) => {
