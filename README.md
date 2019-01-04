@@ -42,7 +42,7 @@ Climate.js takes raw weather data and offers a variety of customizable color sch
 
 **IMPORTANT NOTE**: `climate.min.js` is a *standalone* module for use in default environments. If you're using babel/browserify/webpack, import from `climate.js` instead.
 
-1. Include the script using your preferred method:
+#### Include the script using your preferred method:
 
 **Script Tag**
 ```html
@@ -59,7 +59,7 @@ const climate = require('climate.js');
 import * as climate from 'climate.js';
 ```
 
-2. Initialize the script.
+#### Initialize the script.
 
 If `userLocation` is set to `true`, the user will be prompted for location permissions when `initClimate()` is run. **Note:** Requires a web browser to access geolocation tools!
 
@@ -78,7 +78,7 @@ climate.initClimate({
 
 This config will manually set the city to San Francisco, and update the color scheme every minute based on the type of weather (e.g. sunny or rainy). More config options can be found in [Options](#options).
 
-3. Create your divs.
+#### Create your divs.
 
 **Color Mode:** Changes div colors based on weather.
 
@@ -117,7 +117,8 @@ In the above example, if the weather is currently clear, only the top div will b
 Toggle mode can also be used for temperatures, if specified (e.g. `climate-cold`).
 
 
-4. Create `climate.json`. A default config is provided [here](https://github.com/dbqeo/climate.js/blob/master/examples/climate.json) if you want to get up and running ASAP. If you're too good for the default and want to make your own theme, go to [Custom Theming](#custom-theming).
+#### Create `climate.json`. 
+A default config is provided [here](https://github.com/dbqeo/climate.js/blob/master/examples/climate.json) if you want to get up and running ASAP. If you're too good for the default and want to make your own theme, go to [Custom Theming](#custom-theming).
 
 ## Run Example Code
 
