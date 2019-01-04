@@ -1,6 +1,6 @@
 {
   "name": "climate.js",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Lightweight JavaScript package to theme your website based on the current weather",
   "main": "./dist/index.js",
   "scripts": {
@@ -11,7 +11,7 @@
     "test:watch": "npm test -- --watch",
     "test:examples": "node examples/",
     "cover": "istanbul cover _mocha -- --require babel-core/register --require babel-polyfill --recursive",
-    "build": "mkdir -p dist && cross-env BABEL_ENV=production babel src/climate.js --out-file ./dist/climate.min.js && cross-env BABEL_ENV=development babel src/climate.js --out-file ./dist/climate.js",
+    "build": "mkdir -p dist && browserify src/climate.js --s climate | uglifyjs > ./dist/climate.min.js && cross-env BABEL_ENV=production babel src/climate.js --out-file ./dist/climate.js",
     "prepublish": "npm run clean && npm run build && npm run test",
     "example:nature": "concurrently \"watchify examples/nature/src/nature.js -o examples/nature/nature.js\" \"live-server\"",
     "example:location": "concurrently \"watchify examples/location/src/location.js -o examples/location/location.js\" \"live-server\""
@@ -47,9 +47,18 @@
             [
               "env",
               {
-                "targets": {
-                  "node": "current"
-                }
+                "targets": "> 0.25%, not dead",
+                "modules": false
+              }
+            ]
+          ],
+          "plugins": [
+            "add-module-exports",
+            [
+              "transform-runtime",
+              {
+                "regenerator": true,
+                "polyfill": false
               }
             ]
           ]
@@ -59,8 +68,10 @@
   },
   "homepage": "https://github.com/dbqeo/weather.js#readme",
   "devDependencies": {
+    "acorn": "^6.0.4",
     "babel-cli": "^6.26.0",
     "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-transform-runtime": "^6.23.0",
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-minify": "^0.3.0",
@@ -70,11 +81,11 @@
     "concurrently": "^4.1.0",
     "cross-env": "^5.1.3",
     "istanbul": "^1.0.0-alpha",
+    "live-server": "^1.2.1",
     "mocha": "^5.0.0",
     "npm-run-parallel": "^0.6.0",
     "rimraf": "^2.6.2",
-    "watchify": "^3.11.0",
-    "acorn": "^6.0.4",
-    "live-server": "^1.2.1"
+    "uglify-js": "^3.4.9",
+    "watchify": "^3.11.0"
   }
 }
