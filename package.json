@@ -47,7 +47,7 @@
             [
               "env",
               {
-                "targets": "> 0.25%, not dead",
+                "targets": "> 0.25%, not dead, node",
                 "modules": false
               }
             ]
@@ -58,7 +58,7 @@
               "transform-runtime",
               {
                 "regenerator": true,
-                "polyfill": false
+                "polyfill": true
               }
             ]
           ]

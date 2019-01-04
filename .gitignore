@@ -47,3 +47,4 @@ others
 # Build files
 examples/location/location.js
 examples/nature/nature.js
+dist/publish/

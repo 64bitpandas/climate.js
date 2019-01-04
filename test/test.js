@@ -1,5 +1,5 @@
 import { assert } from 'chai';
-import * as climate from '../dist/climate';
+import * as climate from '../dist/climate.min';
 
 // describe('Awesome test.', () => {
 //   it('should test default awesome function', () => {
@@ -24,15 +24,17 @@ const options = {
 }
 
 describe('Climate.js test', () => {
-  // it('should test getWeather', () => {
-  //   assert(getWeather('San Francisco', options).name === 'San Francisco');
-  // })
+  it('should test getWeather', () => {
+    climate.getWeather('San Francisco', options).then((data) => {
+      assert(data.name === 'San Francisco');
+    });
+  })
 
-  // it('should test getLatLong', () => {
-  //   assert(
-  //     !isNaN(climate.getLatLong(options).coords.latitude) &&
-  //     !isNaN(climate.getLatLong(options).coords.longitude));
-  // })
+  it('should test getLatLong', () => {
+    climate.getLatLong(options).then((data) => {
+      assert(!isNaN(data.coords.latitude) && !isNaN(data.coords.longitude));
+    });
+  })
 
   it('should test kelvin to celsius', () => {
     const expected = 100;
