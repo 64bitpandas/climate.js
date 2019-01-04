@@ -25,6 +25,7 @@ Climate.js takes raw weather data and offers a variety of customizable color sch
 ## Coming Soon
  - Seasons
  - Time (night vs. day)
+ - Gradients
  - Sunset/sunrise gradient skies
  - Wind/rain/snow effects
  - MOAR CUSTOMIZATION
@@ -154,3 +155,54 @@ A default config for reference is provided [here](https://github.com/dbqeo/clima
 | weather     	| Specifies color themes for weather patterns, using the specified parameter from `use.weather`. See the [OpenWeatherMap API list](https://openweathermap.org/weather-conditions) for valid parameters.                                                                                                                                               	|
 | temperature 	| Specifies color themes for temperature ranges, using the specified parameter from `use.weather`. See the [OpenWeatherMap API list](https://openweathermap.org/weather-conditions) for valid parameters. Specify `min` and `max` temperature values inside each self-labeled temperature range. Also specify `units` (either `Fahrenheit` or `Celsius`). If temperature styles are given, they will be used over weather pattern styles.	|
 | sun         	| Two parameters: `rise` and `set`, corresponding to sunrise and sunset colors. Specify `timeRange` which is the time, in minutes, before and after sunset/rise time to display sunset colors.                                                                                                                                                            	|                            
+
+## Methods
+
+#### initClimate(options)
+
+Initializes climate theming. Required for this module to run.
+
+`options: any` The option parameters used for this configuration.
+
+
+#### getWeather(location, options)
+
+Fetches weather data from openweathermap.
+
+`location: any` The location data to be processed. Can either be a lat/long pair ({latitude: ..., longitude: ...}) OR a city name ('San Francisco').
+
+`options: any` Options passed through initClimate()
+
+**Returns** The object with weather data collected from OpenWeatherMap.
+
+#### setTheme(weather, options)
+
+Uses collected data to find and set the color of theme indicators. This is a public function in case you wish to manually configure weather patterns.
+
+`weather: any` Weather object as fetched from openweathermap
+
+`options: any` Options passed through initClimate()
+
+#### getLatLong(options)
+
+Gets the user's position from ipinfo, and calls getWeather() with the position.
+
+`options: any` Options passed through initClimate()
+
+**Returns** The location in openWeatherMap format (location.coords.latitude or location.coords.longitude).
+
+#### convertFromKelvin(resultUnit, input)
+
+Convert from Kelvin to either Celsius or Fahrenheit, as specified.
+
+`resultUnit: string` What unit to convert to ('celsius' or 'fahrenheit')
+
+`input: number` Input Kelvin value.
+
+**Returns** The converted value. (number)
+
+#### getCurrentLocation(options)
+
+Returns coordinates regardless of the type of location detection (ip, geolocation, or none).
+
+`options: any` Options passed through initClimate()
